@@ -1,0 +1,30 @@
+##Local Install for Pointwise 18.2
+
+$ cd /storage/work/$USER 
+$ mkdir pointwise 
+$ ml gcc 
+$ wget -c ftp://ftp.pointwise.com/dload/pw-V18.2R1-linux_x86_64-jre.sh 
+$ bash pw-V18.2R1-linux_x86_64-jre.sh 
+
+####Accept and keep pressing enter until they ask you for a location to install, once they ask that please type:
+
+/storage/work/$USER/pointwise 
+
+####Then it will install your pointiwse program in your work directory. It will show you installation successful. 
+
+#Once this is done: 
+
+#Add the path of your pointwise installation in your ~/.bashrc: 
+
+export PATH="/storage/work/$USER/pointwise:$PATH" 
+setenv("RLM_LICENSE","15053@lm2.rcc.psu.edu") 
+export RLM_LICENSE=15053@lm2.rcc.psu.edu 
+
+
+##now source your .bashrc
+
+$ source ~/.bashrc 
+
+From now on anytime you wish to run pointwise just type the following:
+
+$ pointwise
