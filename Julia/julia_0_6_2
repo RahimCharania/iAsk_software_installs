@@ -1,0 +1,15 @@
+$ cd ~/work
+
+$ wget -c https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.2-linux-x86_64.tar.gz
+
+$ tar -xvzf julia-0.6.2-linux-x86_64.tar.gz
+
+## add these lines to your ~/.bashrc
+
+export PATH=/storage/work/$USER/julia-d386e40c17/bin:$PATH
+export LD_LIBRARY_PATH=/storage/work/$USER/julia-d386e40c17/lib:$LD_LIBRARY_PATH
+
+##now source bashrc
+
+source ~/.bashrc
+
