@@ -1,0 +1,42 @@
+## Create a singularity image that runs Firefox in your following directory:
+mkdir ~/work/firefox
+cd ~/work/firefox
+singularity pull shub://jpetucci/firefox_icsaci
+
+## Log into ACI-b with X11 forwarding on:
+ssh USERID@aci-b.aci.ics.psu.edu -X -Y
+
+## Submit an interactive batch job (you will need to change the resources based on your needs): 
+$ qsub -I -X -A open -l nodes=1:ppn=2 -l walltime=4:00:00 
+
+## After logging into the compute node, start a screen session:
+$ screen
+
+## Load the Python module:
+$ module load python/3.6.3-anaconda5.0.1
+
+## Activate your own environment, if any (optional):
+$ source activate py36
+
+## Spin up the Jupiter notebook:
+$ jupyter notebook
+
+## if it shows command not found, please do the following:
+$ conda install jupyter notebook
+$ jupyter notebook
+
+## Copy the links for the notebook server and detach the screen session:
+example address: http://localhost:8888/?token=de99f0c76cbcfcb183693ff0491f00f278d781bb3586ea8e
+
+Type:
+Ctrl+A+D
+
+## Go to the folder that has the singularity image:
+cd ~/work/firefox
+
+## Open up the Firefox:
+$ singularity exec jpetucci-firefox_icsaci-master-latest.simg /opt/firefox/./firefox
+
+## Paste the address of the notebook server into the firefox and you should be able to use the jupyter notebook server on the compute node
+
+## Now you can open the notebook and run your code!
