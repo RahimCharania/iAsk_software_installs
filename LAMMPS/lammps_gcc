@@ -1,0 +1,41 @@
+$ cd ~/work
+
+$ wget -c http://lammps.sandia.gov/tars/lammps-stable.tar.gz
+
+$ tar -xf lammps-stable.tar.gz
+
+$ module load gcc/5.3.1 openmpi
+
+$ cd lammps-****
+#### note here lammps-**** is used because you will ahve a different directory name as per the latest lammps version available
+#### for example lammps-12Dec18 or so on..
+
+$ cd lib/meam
+
+$ make -f Makefile.gfortran
+
+$ cd ..
+
+$ cd poems
+
+$ make -f Makefile.g++
+
+$ cd ../..
+
+$ cd src
+
+
+####make commands
+make yes-standard
+make no-gpu
+make no-python
+make no-kim
+make no-kokkos
+make no-reax
+make no-voronoi
+make no-latte
+make no-mscg
+make yes-user-reaxc
+make yes-user-intel
+
+$ make g++_openmpi
