@@ -1,0 +1,71 @@
+Bootstrap: docker
+From: centos:latest
+
+%environment
+# use bash as default shell
+SHELL=/bin/bash
+export SHELL
+
+%setup
+# runs on host - the path to the image is $SINGULARITY_ROOTFS
+
+%post
+# post-setup script
+yum -y install wget which # i like to download and know where things are
+
+yum install -y epel-release
+yum install -y octave octave-devel
+OCTAVE_VERSION=`octave-cli --eval version|tail -1|cut -d\  -f3`
+touch /usr/share/octave/$OCTAVE_VERSION/etc/built-in-docstrings
+
+yum install -y git mercurial autoconf libtool flex unzip make
+
+ompi=ompi
+cd
+git clone https://github.com/open-mpi/ompi.git $ompi
+cd $ompi
+./autogen.pl                                                     > ompi-install.log
+./configure --prefix=/usr/local --enable-shared --enable-static >> ompi-install.log
+make -j5                                                        >> ompi-install.log
+make install                                                    >> ompi-install.log
+
+export LD_CUSTOM_PATH=/usr/local/lib:/usr/local/lib/openmpi
+export LD_LIBRARY_PATH=$LD_CUSTOM_PATH:$LD_LIBRARY_PATH
+export LD_RUN_PATH=$LD_CUSTOM_PATH:$LD_RUN_PATH
+
+octavempi=octavempi
+cd
+hg clone http://hg.code.sf.net/p/octave/mpi $octavempi
+cd $octavempi
+hg archive ../mpi.zip
+octave-cli --eval 'pkg install ../mpi.zip'
+
+
+yum install -y gcc-c++ cmake
+yum install -y gsl-devel
+yum install -y fftw-devel
+yum install -y atlas-devel	
+yum install -y gnuplot
+yum install -y git
+yum install -y doxygen
+
+
+mkdir -p /JDFTXDIR
+cd /JDFTXDIR
+wget -c https://github.com/RahimCharania/iAsk_software_installs/raw/master/JDFTx/JDFTx_tarball_1.4.2/jdftx.1.4.2.tar.gz
+tar xvpzf jdftx.1.4.2.tar.gz
+mkdir build
+cd build   
+cmake /JDFTXDIR/jdftx
+make -j4
+
+export PATH="/JDFTXDIR/build:JDFTXDIR/jdftx/scripts:$PATH"
+export PATH=/JDFTXDIR/build:JDFTXDIR/jdftx/scripts:$PATH
+
+
+ mkdir -p /storage/home
+    mkdir -p /storage/work
+    mkdir -p /gpfs/scratch
+    mkdir -p /gpfs/group
+    mkdir -p /var/spool/torque
+
