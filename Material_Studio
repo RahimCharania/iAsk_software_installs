@@ -1,3 +1,0 @@
-You can download Material Studio here: https://downloads.its.psu.edu/download.cgi?os_type=Windows&prod=Materials_Studio
-
-In terms of setting up materials studio, all that is required is to point to our license server lm.rcc.psu.edu on port 1715. The machine that you are installing the software on needs to be connected to a PSU network (or the Penn State VPN) to be able to reach the license server.
