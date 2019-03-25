@@ -1,0 +1,23 @@
+BootStrap: debootstrap
+OSVersion: cosmic
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%runscript
+
+%post
+apt-get update
+apt-get -y install wget
+apt-get -y install libcanberra-gtk*
+mkdir -p /usr/bin/packagekit_r
+cd /usr/bin/packagekit_r
+wget http://ftp.osuosl.org/pub/ubuntu/pool/universe/p/packagekit /packagekit-gtk3-module_0.8.17-4ubuntu6~gcc5.4ubuntu1_amd64. deb
+dpkg -i packagekit-gtk3-module_0.8.17-4ubuntu6~gcc5.4ubuntu1_amd64. deb
+cd /usr/bin/packagekit_r
+apt-get -y install fonts-liberation libappindicator3-1 libnspr4 libnss3 libxss1 lsb-release xdg-utils
+wget https://dl.google.com/linux/direct/google-chrome-stable _current_amd64.deb
+dpkg -i google-chrome-stable_current_amd64.deb
+
+# install missing requirements if any
+apt-get -y install -f
+# update all packages
+apt-get -y upgrade
