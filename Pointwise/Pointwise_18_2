@@ -3,7 +3,9 @@
 $ cd /storage/work/$USER 
 $ mkdir pointwise 
 $ ml gcc 
-$ wget -c ftp://ftp.pointwise.com/dload/pw-V18.2R1-linux_x86_64-jre.sh 
+##$ wget -c ftp://ftp.pointwise.com/dload/pw-V18.2R1-linux_x86_64-jre.sh 
+## download form link here: ftp://ftp.pointwise.com/dload
+
 $ bash pw-V18.2R1-linux_x86_64-jre.sh 
 
 ####Accept and keep pressing enter until they ask you for a location to install, once they ask that please type:
